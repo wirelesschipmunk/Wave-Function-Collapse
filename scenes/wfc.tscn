@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://2vntgp1c4p48"]
+[gd_scene load_steps=5 format=3 uid="uid://2vntgp1c4p48"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_ihsil"]
+[ext_resource type="Texture2D" uid="uid://b6vx7khvmclq4" path="res://tiles.png" id="2_phf3f"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_edww0"]
+texture = ExtResource("2_phf3f")
+texture_region_size = Vector2i(7, 7)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_rb8vi"]
+tile_size = Vector2i(7, 7)
+sources/0 = SubResource("TileSetAtlasSource_edww0")
 
 [node name="wfc" type="Node2D"]
 script = ExtResource("1_ihsil")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_rb8vi")
+format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(324, 324)

@@ -4,12 +4,14 @@ var w: int
 var h: int
 var grid = []
 var matrix
+var tilemap: TileMap
 
-func _init(W: int, H: int, s: Array, m: Array):
+func _init(W: int, H: int, s: Array, m: Array, t: TileMap):
 	w = W
 	h = H
 	grid = init_grid(s)
 	matrix = m
+	tilemap = t
 
 
 func init_grid(s) -> Array:
@@ -38,8 +40,6 @@ func propagate(queue: Array) -> void:
 		if (is_dirty):
 			for n in get_neighbors(c):
 				queue.append(n)
-
-
 
 func get_neighbors(c: Cell) -> Array:
 	var ns = []
