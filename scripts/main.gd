@@ -18,15 +18,13 @@ var m = com.build_compat_matrix(states, compat)
 var w: Wave = Wave.new(DIM, DIM, states, m, tilemap)
 
 func _ready() -> void:
-	#var tileset = load("res://tilemap.png").get_image()
-	#var tile_coords = Vector2(1, 1)
-	
-	var i = 0
-	while !(w.is_contradictory() || w.is_collapsed()):
-		w.iterate()
-		i += 1
-		print(cells_collapsed())
-	tilemap.make_tilemap(w)
+	print(tilemap.get_tile_edge_pixels(0, 0, 6))
+	#var i = 0
+	#while !(w.is_contradictory() || w.is_collapsed()):
+		#w.iterate()
+		#i += 1
+		#print(cells_collapsed())
+	#tilemap.make_tilemap(w)
 		 #print("\n")
 		 #print_wave()
 
