@@ -36,7 +36,7 @@ func propagate(queue: Array) -> void:
 		var c: Cell = queue[0]
 		queue.remove_at(0)
 
-		var is_dirty = c.update(get_neighbors(c), matrix)
+		var is_dirty = c.update(get_neighbors_with_directions(c), matrix)
 		if (is_dirty):
 			for n in get_neighbors(c):
 				queue.append(n)
@@ -53,6 +53,20 @@ func get_neighbors(c: Cell) -> Array:
 	if c.y < h - 1:
 		ns.append(grid[c.y + 1][c.x])
 			
+	return ns
+
+func get_neighbors_with_directions(c: Cell) -> Array:
+	var ns = []
+	
+	if c.x > 0:
+		ns.append({"cell": grid[c.y][c.x - 1], "dir": "left"})
+	if c.x < w - 1:
+		ns.append({"cell": grid[c.y][c.x + 1], "dir": "right"})
+	if c.y > 0:
+		ns.append({"cell": grid[c.y - 1][c.x], "dir": "up"})
+	if c.y < h - 1:
+		ns.append({"cell": grid[c.y + 1][c.x], "dir": "down"})
+	
 	return ns
 
 func is_contradictory() -> bool:

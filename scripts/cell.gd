@@ -19,9 +19,10 @@ func update(ns, m) -> bool:
 		var cell_states = []
 		for s1 in states: # loops over this cell's states
 			var is_compatible = false
-			for s2 in n.states: # loops over a neighbors states
-				if is_compat(s1, s2, m):
+			for s2 in n["cell"].states: # loops over a neighbors states
+				if is_compat(s1, s2, n["dir"], m):
 					is_compatible = true
+					break
 			
 			if is_compatible:
 				cell_states.append(s1)
@@ -32,9 +33,8 @@ func update(ns, m) -> bool:
 	
 	return is_dirty
 
-
-func is_compat(s1, s2, m) -> bool:
-	return m[s1 - 1][s2 - 1]
+func is_compat(s1, s2, d, m) -> bool:
+	return m[s1 - 1][s2 - 1][d]
 
 func observe() -> void:
 	states = [states.pick_random()]
