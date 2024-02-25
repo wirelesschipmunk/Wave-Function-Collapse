@@ -31,10 +31,4 @@ func build_compat_matrix(states: Array, compat: Dictionary) -> Array:
 	
 	return m
 
-# output
-
-# [true, true, false]
-# [true, true, true]
-# [false, true, true]
-
 		
