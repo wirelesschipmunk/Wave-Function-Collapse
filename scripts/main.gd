@@ -1,6 +1,6 @@
 extends Node2D
 
-const DIM = 40
+const DIM = 70
 
 const AIR = 1
 const EDGE = 2
@@ -33,16 +33,16 @@ const CORNER = 10
 # 	9: Tile.new([24, 25, 27, 28], 0, 4, Tile.make_edge_compat([SINGLE_EDGE_1], [SINGLE_EDGE_1], [DOUBLE_EDGE], [INNER_WALL]))
 # }
 
-var rotations = [
+# var rotations = [
 	# inner corner
 	# Tile.make_rotations([2], 1, 1, Tile.make_edge_compat([INNER_WALL], [SINGLE_EDGE_1], [INNER_WALL], [SINGLE_EDGE_1])),
 	# edge
 	# Tile.make_rotations(0, 2, Tile.make_edge_compat([SINGLE_EDGE_1], [SINGLE_EDGE_1], [INNER_WALL], [AIR])),
 	# corner
 	# Tile.make_rotations([4], 1, 2, Tile.make_edge_compat([SINGLE_EDGE_1], [AIR], [SINGLE_EDGE_1], [AIR]))
-]
+# ]
 
-var states_list = [
+var tiles = [
 	# inner wall
 	Tile.new(0, 1, 0, Tile.make_edge_compat_all([INNER_WALL])),
 	# air
@@ -64,12 +64,10 @@ var states_list = [
 	Tile.new(1, 1, 3, Tile.make_edge_compat([INNER_WALL], [SINGLE_EDGE_3], [SINGLE_EDGE_4], [INNER_WALL])),
 ]
 
-var tiles: Array = init_tiles()
-
 var com: Compat = Compat.new()
 var m: Array = com.build_compat_matrix(tiles)
 
-var weights = [1, 1, 1,1,1,1, 1,1,1,1, 1,1,1,1]
+var weights = [10, 100, 1,1,1,1, 1,1,1,1, 1,1,1,1]
 
 var w: Wave = Wave.new(DIM, DIM, range(tiles.size()), weights, m)
 
@@ -85,17 +83,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		get_tree().reload_current_scene()
-
-func init_tiles() -> Array:
-	# make this print correctly
-	var s = []
-	for rotated in rotations:
-		s.append_array(rotated)
-	for state in states_list:
-		s.append(state)
-	
-	return s
-	
 
 func print_wave() -> void:
 	for row in w.grid:

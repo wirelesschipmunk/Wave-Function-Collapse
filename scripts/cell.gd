@@ -34,17 +34,16 @@ func update(ns, m) -> bool:
 	return is_dirty
 
 func is_compat(s1, s2, d, m) -> bool:
-	prints(s1, s2)
 	return m[s1][s2][d]
 
 func observe(ws: Array) -> void:
-	var sw = []
+	var pool = []
 
-	for w in ws:
-		if states.has(w):
-			sw.append(w)
+	for s in states:
+		for i in range(ws[s]):
+			pool.append(s)
 
-	states = [sw.pick_random()]
+	states = [pool.pick_random()]
 
 func get_entropy() -> int:
 	return states.size()
