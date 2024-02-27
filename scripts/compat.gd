@@ -7,28 +7,33 @@ var directions = [
 	"down"
 ]
 
-func build_compat_matrix(states: Array, compat: Dictionary) -> Array:
+var opps = {
+	"left": "right",
+	"right": "left",
+	"up": "down",
+	"down": "up"
+}
+
+func build_compat_matrix(tiles: Array) -> Array:
 	var m = []
 	# loops over all possible s1 states
-	for s1 in states:
+	for t1 in tiles:
 		var row = []
 		# loops over all possible s2 states
-		for s2 in states:
+		for t2 in tiles:
 			var dc = {}
 			for d in directions:
-				if compat[s1].has(s2) || compat[s2].has(s1):
-					dc[d] = true
-				elif s1 == s2: # if the states are the same they are compatible
-					dc[d] = true
-				else:
-					dc[d] = false
-			row.append(dc)
-		# print(row)
-		m.append(row)
+				var t1_edge_compat = t1.edge_compat[d]
+				var t2_edge_compat = t2.edge_compat[opps[d]]
+				var	compat = false
 
-	m[0][1]["up"] = false
-	m[1][0]["down"] = false
+				for t2_edge in t2_edge_compat:
+					if t1_edge_compat.has(t2_edge):
+						compat = true
+						break
+
+				dc[d] = compat
+			row.append(dc)
+		m.append(row)
 	
 	return m
-
-		

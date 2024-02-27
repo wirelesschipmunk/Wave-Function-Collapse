@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://2vntgp1c4p48"]
+[gd_scene load_steps=9 format=3 uid="uid://2vntgp1c4p48"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_ihsil"]
 [ext_resource type="Texture2D" uid="uid://b6vx7khvmclq4" path="res://tiles.png" id="2_phf3f"]
 [ext_resource type="Texture2D" uid="uid://i2cus7txitx" path="res://tilemap.png" id="3_mr1dr"]
 [ext_resource type="Script" path="res://scripts/tilemap.gd" id="4_dgogh"]
+[ext_resource type="Script" path="res://scenes/Camera2D.gd" id="5_a2m4q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_edww0"]
 texture = ExtResource("2_phf3f")
@@ -18,9 +19,37 @@ texture_region_size = Vector2i(6, 6)
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
+1:1/next_alternative_id = 5
 1:1/0 = 0
+1:1/1 = 1
+1:1/1/flip_h = true
+1:1/2 = 2
+1:1/2/flip_h = true
+1:1/2/flip_v = true
+1:1/3 = 3
+1:1/3/flip_v = true
+0:2/next_alternative_id = 4
 0:2/0 = 0
+0:2/1 = 1
+0:2/1/flip_h = true
+0:2/1/flip_v = true
+0:2/1/transpose = true
+0:2/2 = 2
+0:2/2/flip_v = true
+0:2/3 = 3
+0:2/3/flip_v = true
+0:2/3/transpose = true
+1:2/next_alternative_id = 5
 1:2/0 = 0
+1:2/1 = 1
+1:2/1/flip_h = true
+1:2/1/transpose = true
+1:2/2 = 2
+1:2/2/flip_h = true
+1:2/2/flip_v = true
+1:2/2/transpose = true
+1:2/3 = 3
+1:2/3/flip_v = true
 0:3/0 = 0
 1:3/0 = 0
 0:4/0 = 0
@@ -35,9 +64,11 @@ sources/3 = SubResource("TileSetAtlasSource_ebvrr")
 script = ExtResource("1_ihsil")
 
 [node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
 tile_set = SubResource("TileSet_rb8vi")
 format = 2
 script = ExtResource("4_dgogh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(324, 324)
+script = ExtResource("5_a2m4q")

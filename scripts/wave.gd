@@ -2,17 +2,17 @@ class_name Wave
 
 var w: int
 var h: int
-var grid = []
-var matrix
+var grid: Array
+var matrix: Array
 var tilemap: TileMap
+var weights: Array
 
-func _init(W: int, H: int, s: Array, m: Array, t: TileMap):
+func _init(W: int, H: int, s: Array, ws: Array, m: Array):
 	w = W
 	h = H
 	grid = init_grid(s)
+	weights = ws
 	matrix = m
-	tilemap = t
-
 
 func init_grid(s) -> Array:
 	var g = []
@@ -28,7 +28,7 @@ func iterate() -> void:
 	var cs := get_min_entropy_cells()
 	var c: Cell = cs.pick_random()
 
-	c.observe()
+	c.observe(weights)
 	propagate(get_neighbors(c))
 
 func propagate(queue: Array) -> void:
