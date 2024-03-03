@@ -1,6 +1,6 @@
 extends Node2D
 
-const DIM = 70
+const DIM = 20
 
 const AIR = 1
 const EDGE = 2
@@ -11,6 +11,9 @@ const SINGLE_EDGE_2 = 7
 const SINGLE_EDGE_3 = 8
 const SINGLE_EDGE_4 = 9
 const CORNER = 10
+
+signal generate
+var generating = false
 
 # var tiles: Dictionary = {
 # 	# straight double edge
@@ -67,22 +70,23 @@ var tiles = [
 var com: Compat = Compat.new()
 var m: Array = com.build_compat_matrix(tiles)
 
-var weights = [10, 100, 1,1,1,1, 1,1,1,1, 1,1,1,1]
+var weights = [20, 200, 5,5,5,5, 2,2,2,2, 1,1,1,1]
 
 var w: Wave = Wave.new(DIM, DIM, range(tiles.size()), weights, m)
 
-func _ready() -> void:
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept") && !generating:
+		generate.emit()
+
+func _on_generate() -> void:
+	generating = true
+
+	w = Wave.new(DIM, DIM, range(tiles.size()), weights, m)
 	while !(w.is_contradictory() || w.is_collapsed()):
 		w.iterate()
-	
-	if w.is_contradictory():
-		print("contradictory")
-
 	$TileMap.make_tilemap(w, tiles)
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		get_tree().reload_current_scene()
+	generating = false
 
 func print_wave() -> void:
 	for row in w.grid:

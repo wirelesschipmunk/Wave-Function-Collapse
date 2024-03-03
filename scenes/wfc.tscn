@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://2vntgp1c4p48"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_ihsil"]
+[ext_resource type="Script" path="res://scripts/wfc.gd" id="1_w2jcd"]
 [ext_resource type="Texture2D" uid="uid://b6vx7khvmclq4" path="res://tiles.png" id="2_phf3f"]
 [ext_resource type="Texture2D" uid="uid://i2cus7txitx" path="res://tilemap.png" id="3_mr1dr"]
 [ext_resource type="Script" path="res://scripts/tilemap.gd" id="4_dgogh"]
@@ -61,7 +61,7 @@ sources/0 = SubResource("TileSetAtlasSource_edww0")
 sources/3 = SubResource("TileSetAtlasSource_ebvrr")
 
 [node name="wfc" type="Node2D"]
-script = ExtResource("1_ihsil")
+script = ExtResource("1_w2jcd")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -72,3 +72,5 @@ script = ExtResource("4_dgogh")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(324, 324)
 script = ExtResource("5_a2m4q")
+
+[connection signal="generate" from="." to="." method="_on_generate"]

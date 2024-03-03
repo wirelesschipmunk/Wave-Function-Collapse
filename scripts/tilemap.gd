@@ -18,7 +18,8 @@ func make_tilemap(w: Wave, tiles: Array) -> void:
 				var tile: Tile = tiles[state]
 
 				var atlas_coords = Vector2(tile.ax, tile.ay)
-
+				# if state != 2:
+				# 	await get_tree().create_timer(0.01).timeout
 				set_cell(tile_layer, Vector2(x_i, y_i), tile_set_id, atlas_coords, tile.tile_rotation)
 			# else:
 			# 	tilemap.set_cell(0, Vector2(x_i, y_i), 0, Vector2(0, 0))
