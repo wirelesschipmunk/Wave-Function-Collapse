@@ -70,7 +70,8 @@ format = 2
 script = ExtResource("4_dgogh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(324, 324)
+position = Vector2(60, 60)
+zoom = Vector2(5, 5)
 script = ExtResource("5_a2m4q")
 
 [connection signal="generate" from="." to="." method="_on_generate"]

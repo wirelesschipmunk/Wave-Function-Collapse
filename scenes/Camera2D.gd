@@ -7,7 +7,7 @@ func _process(delta: float) -> void:
 
 	position += direction * speed * delta
 
-	if Input.is_action_just_pressed("zoom_in") && zoom != Vector2(0.1, 0.1):
+	if Input.is_action_just_pressed("zoom_in") && zoom.x < 8.0:
 		zoom += Vector2(0.3, 0.3)
-	if Input.is_action_just_pressed("zoom_out") && zoom != Vector2(1.2, 1.2):
+	if Input.is_action_just_pressed("zoom_out") && zoom.x > 0.5:
 		zoom -= Vector2(0.3, 0.3)
